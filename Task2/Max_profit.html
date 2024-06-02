@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max-Profit-Problem</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script>
+    function calculateEarnings(time) {
+    let totalEarnings = 0;
+    let theatreCount = 0;
+    let pubCount = 0;
+    let parkCount = 0;
+
+        let maxEarnings = 0;
+      while(time>0){
+        if (time >= 10) {
+            parkCount++;
+            time -= 10; 
+        }else if(time >=5 ){
+            theatreCount++,
+            time -= 5;
+        }else if(time <=4){
+            pubCount ++,
+            time -= 4
+        }
+    }
+
+    
+    totalEarnings = theatreCount*1500 + pubCount*1000 + parkCount*3000;
+    return `Total Earnings: $${totalEarnings}, T: ${theatreCount}, P: ${pubCount}, C: ${parkCount}`;
+}
+
+const unitsOfTime = 10;
+const result = calculateEarnings(unitsOfTime)
+document.getElementById("demo").innerHTML = result
+
+
+    </script>
+</body>
+</html>

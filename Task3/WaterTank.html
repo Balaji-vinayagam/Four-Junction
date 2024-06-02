@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Water Tank Problem</title>
+    <style>
+        #watertank{
+            border: 1;
+            border-collapse: collapse;
+        }
+        td{
+            width: 80px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo"></div>
+    <table id="watertank" border="1">
+        
+    </table> 
+    
+
+<script>        
+const blocks = [0,1,0,2,1,0,1,3,2,1,2,1];
+
+const waterLevels = [];
+let leftMax = 0;
+let sum = 0;
+for (let i = 0; i < blocks.length; i++) {
+    leftMax = Math.max(leftMax, blocks[i]);
+    const rightMax = Math.max(...blocks.slice(i + 1));
+    const water = Math.max(0,Math.min(leftMax, rightMax) - blocks[i]);
+    waterLevels.push(water);
+}
+
+
+
+const rowCount = Math.max(...blocks);
+const columnCount = blocks.length;
+
+console.log(rowCount,columnCount); 
+
+const table = document.getElementById('watertank');
+
+for (let i = 0; i < blocks.length; i++) {
+    sum += waterLevels[i];
+    if (blocks[i] === 1 && waterLevels[i] === 1) {
+        waterLevels[i]++;
+    }
+   
+}
+
+console.log(waterLevels); 
+console.log(sum); 
+document.getElementById("demo").innerHTML = `${sum} units`;
+
+for (let i = 0; i < rowCount; i++) {
+    const row = document.createElement('tr');
+    for(let j=0;j<columnCount;j++){
+        const column = document.createElement("td");
+        if (i < waterLevels[j]) {
+            column.style.backgroundColor = 'blue';
+        }
+        if (i < blocks[j]) {
+            column.style.backgroundColor = 'yellow';
+            
+        }
+        row.appendChild(column);
+    }
+    
+    table.insertBefore(row, table.firstChild);
+    // table.appendChild(row);
+}
+</script>
+</body>
+</html>
